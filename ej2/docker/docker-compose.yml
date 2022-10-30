@@ -1,0 +1,27 @@
+---
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - ${WEBAPP_STORAGE_HOME}/site/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: ics-ej2
+      MYSQL_USER: dfr
+      MYSQL_PASSWORD: dfr
+
+  wordpress:
+    image: wordpress:latest
+    depends_on:
+      - mysql
+    ports:
+      - "80:80"
+    restart: always
+    volumes:
+      - ${WEBAPP_STORAGE_HOME}/site/wwwroot:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_NAME: ics-ej2
+      WORDPRESS_DB_USER: dfr
+      WORDPRESS_DB_PASSWORD: dfr
