@@ -1,7 +1,7 @@
 ---
 services:
   mysql:
-    image: mysql:5.7
+    image: icsej2containeregistry.azurecr.io/mysql:5.7
     restart: always
     volumes:
       - ${WEBAPP_STORAGE_HOME}/site/data:/var/lib/mysql
@@ -12,7 +12,7 @@ services:
       MYSQL_PASSWORD: dfr
 
   wordpress:
-    image: wordpress:latest
+    image: icsej2containeregistry.azurecr.io/wordpress:latest
     depends_on:
       - mysql
     ports:
